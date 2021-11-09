@@ -1,0 +1,1369 @@
+Grammar
+
+    0 $accept: PROGRAM $end
+
+    1 PROGRAM: CODE
+
+    2 CODE: CODE BLOCK
+    3     | BLOCK
+
+    4 BLOCK: DECLARATION separator
+    5      | ASSIGNMENT separator
+    6      | INPUT separator
+    7      | OUTPUT separator
+    8      | LENGTH separator
+    9      | DECISION
+   10      | ITERATION
+
+   11 LENGTH: fun_long open_parenthesis LIST close_parenthesis
+
+   12 LIST: open_dec ITEMS close_dec
+
+   13 ITEMS: ITEMS dec_separator ITEM
+   14      | ITEM
+
+   15 ITEM: CONSTANT
+   16     | id
+
+   17 INPUT: op_get id
+
+   18 OUTPUT: op_display EXPRESSION
+
+   19 ASSIGNMENT: id op_assign EXPRESSION
+   20           | id op_assign ASSIGNMENT
+
+   21 DECISION: op_if open_parenthesis CONDITION close_parenthesis CODE op_endif
+
+   22 CONDITION: CONDITION op_and COMPARATION
+   23          | CONDITION op_or COMPARATION
+   24          | open_parenthesis CONDITION close_parenthesis
+   25          | COMPARATION
+
+   26 COMPARATION: EXPRESSION COMPARATOR EXPRESSION
+
+   27 COMPARATOR: op_eq
+   28           | op_lt
+   29           | op_le
+   30           | op_gt
+   31           | op_ge
+   32           | op_ne
+
+   33 ITERATION: op_while open_parenthesis CONDITION close_parenthesis CODE op_endwhile
+   34          | op_while id op_in LIST op_do CODE op_endwhile
+
+   35 DECLARATION: op_dim open_dec VARIABLES close_dec op_as open_dec DATATYPES close_dec
+
+   36 EXPRESSION: EXPRESSION op_sum TERM
+   37           | EXPRESSION op_sub TERM
+   38           | TERM
+
+   39 TERM: TERM op_mult FACTOR
+   40     | TERM op_div FACTOR
+   41     | FACTOR
+
+   42 FACTOR: open_parenthesis EXPRESSION close_parenthesis
+   43       | LENGTH
+   44       | id
+   45       | CONSTANT
+
+   46 VARIABLES: VARIABLES dec_separator id
+   47          | id
+
+   48 DATATYPES: DATATYPES dec_separator DATATYPE
+   49          | DATATYPE
+
+   50 DATATYPE: int_type
+   51         | real_type
+   52         | string_type
+
+   53 CONSTANT: int_constant
+   54         | real_constant
+   55         | string_constant
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    id (258) 16 17 19 20 34 44 46 47
+    int_constant (259) 53
+    real_constant (260) 54
+    string_constant (261) 55
+    op_assign (262) 19 20
+    op_sum (263) 36
+    op_sub (264) 37
+    op_mult (265) 39
+    op_div (266) 40
+    separator (267) 4 5 6 7 8
+    op_eq (268) 27
+    op_lt (269) 28
+    op_le (270) 29
+    op_gt (271) 30
+    op_ge (272) 31
+    op_ne (273) 32
+    op_and (274) 22
+    op_or (275) 23
+    op_if (276) 21
+    op_endif (277) 21
+    op_while (278) 33 34
+    op_endwhile (279) 33 34
+    open_parenthesis (280) 11 21 24 33 42
+    close_parenthesis (281) 11 21 24 33 42
+    op_dim (282) 35
+    op_as (283) 35
+    open_dec (284) 12 35
+    close_dec (285) 12 35
+    dec_separator (286) 13 46 48
+    int_type (287) 50
+    real_type (288) 51
+    string_type (289) 52
+    op_display (290) 18
+    op_get (291) 17
+    fun_long (292) 11
+    op_in (293) 34
+    op_do (294) 34
+
+
+Nonterminals, with rules where they appear
+
+    $accept (40)
+        on left: 0
+    PROGRAM (41)
+        on left: 1
+        on right: 0
+    CODE (42)
+        on left: 2 3
+        on right: 1 2 21 33 34
+    BLOCK (43)
+        on left: 4 5 6 7 8 9 10
+        on right: 2 3
+    LENGTH (44)
+        on left: 11
+        on right: 8 43
+    LIST (45)
+        on left: 12
+        on right: 11 34
+    ITEMS (46)
+        on left: 13 14
+        on right: 12 13
+    ITEM (47)
+        on left: 15 16
+        on right: 13 14
+    INPUT (48)
+        on left: 17
+        on right: 6
+    OUTPUT (49)
+        on left: 18
+        on right: 7
+    ASSIGNMENT (50)
+        on left: 19 20
+        on right: 5 20
+    DECISION (51)
+        on left: 21
+        on right: 9
+    CONDITION (52)
+        on left: 22 23 24 25
+        on right: 21 22 23 24 33
+    COMPARATION (53)
+        on left: 26
+        on right: 22 23 25
+    COMPARATOR (54)
+        on left: 27 28 29 30 31 32
+        on right: 26
+    ITERATION (55)
+        on left: 33 34
+        on right: 10
+    DECLARATION (56)
+        on left: 35
+        on right: 4
+    EXPRESSION (57)
+        on left: 36 37 38
+        on right: 18 19 26 36 37 42
+    TERM (58)
+        on left: 39 40 41
+        on right: 36 37 38 39 40
+    FACTOR (59)
+        on left: 42 43 44 45
+        on right: 39 40 41
+    VARIABLES (60)
+        on left: 46 47
+        on right: 35 46
+    DATATYPES (61)
+        on left: 48 49
+        on right: 35 48
+    DATATYPE (62)
+        on left: 50 51 52
+        on right: 48 49
+    CONSTANT (63)
+        on left: 53 54 55
+        on right: 15 45
+
+
+State 0
+
+    0 $accept: . PROGRAM $end
+
+    id          shift, and go to state 1
+    op_if       shift, and go to state 2
+    op_while    shift, and go to state 3
+    op_dim      shift, and go to state 4
+    op_display  shift, and go to state 5
+    op_get      shift, and go to state 6
+    fun_long    shift, and go to state 7
+
+    PROGRAM      go to state 8
+    CODE         go to state 9
+    BLOCK        go to state 10
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 1
+
+   19 ASSIGNMENT: id . op_assign EXPRESSION
+   20           | id . op_assign ASSIGNMENT
+
+    op_assign  shift, and go to state 18
+
+
+State 2
+
+   21 DECISION: op_if . open_parenthesis CONDITION close_parenthesis CODE op_endif
+
+    open_parenthesis  shift, and go to state 19
+
+
+State 3
+
+   33 ITERATION: op_while . open_parenthesis CONDITION close_parenthesis CODE op_endwhile
+   34          | op_while . id op_in LIST op_do CODE op_endwhile
+
+    id                shift, and go to state 20
+    open_parenthesis  shift, and go to state 21
+
+
+State 4
+
+   35 DECLARATION: op_dim . open_dec VARIABLES close_dec op_as open_dec DATATYPES close_dec
+
+    open_dec  shift, and go to state 22
+
+
+State 5
+
+   18 OUTPUT: op_display . EXPRESSION
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH      go to state 28
+    EXPRESSION  go to state 29
+    TERM        go to state 30
+    FACTOR      go to state 31
+    CONSTANT    go to state 32
+
+
+State 6
+
+   17 INPUT: op_get . id
+
+    id  shift, and go to state 33
+
+
+State 7
+
+   11 LENGTH: fun_long . open_parenthesis LIST close_parenthesis
+
+    open_parenthesis  shift, and go to state 34
+
+
+State 8
+
+    0 $accept: PROGRAM . $end
+
+    $end  shift, and go to state 35
+
+
+State 9
+
+    1 PROGRAM: CODE .
+    2 CODE: CODE . BLOCK
+
+    id          shift, and go to state 1
+    op_if       shift, and go to state 2
+    op_while    shift, and go to state 3
+    op_dim      shift, and go to state 4
+    op_display  shift, and go to state 5
+    op_get      shift, and go to state 6
+    fun_long    shift, and go to state 7
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    BLOCK        go to state 36
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 10
+
+    3 CODE: BLOCK .
+
+    $default  reduce using rule 3 (CODE)
+
+
+State 11
+
+    8 BLOCK: LENGTH . separator
+
+    separator  shift, and go to state 37
+
+
+State 12
+
+    6 BLOCK: INPUT . separator
+
+    separator  shift, and go to state 38
+
+
+State 13
+
+    7 BLOCK: OUTPUT . separator
+
+    separator  shift, and go to state 39
+
+
+State 14
+
+    5 BLOCK: ASSIGNMENT . separator
+
+    separator  shift, and go to state 40
+
+
+State 15
+
+    9 BLOCK: DECISION .
+
+    $default  reduce using rule 9 (BLOCK)
+
+
+State 16
+
+   10 BLOCK: ITERATION .
+
+    $default  reduce using rule 10 (BLOCK)
+
+
+State 17
+
+    4 BLOCK: DECLARATION . separator
+
+    separator  shift, and go to state 41
+
+
+State 18
+
+   19 ASSIGNMENT: id op_assign . EXPRESSION
+   20           | id op_assign . ASSIGNMENT
+
+    id                shift, and go to state 42
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH      go to state 28
+    ASSIGNMENT  go to state 43
+    EXPRESSION  go to state 44
+    TERM        go to state 30
+    FACTOR      go to state 31
+    CONSTANT    go to state 32
+
+
+State 19
+
+   21 DECISION: op_if open_parenthesis . CONDITION close_parenthesis CODE op_endif
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 45
+    fun_long          shift, and go to state 7
+
+    LENGTH       go to state 28
+    CONDITION    go to state 46
+    COMPARATION  go to state 47
+    EXPRESSION   go to state 48
+    TERM         go to state 30
+    FACTOR       go to state 31
+    CONSTANT     go to state 32
+
+
+State 20
+
+   34 ITERATION: op_while id . op_in LIST op_do CODE op_endwhile
+
+    op_in  shift, and go to state 49
+
+
+State 21
+
+   33 ITERATION: op_while open_parenthesis . CONDITION close_parenthesis CODE op_endwhile
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 45
+    fun_long          shift, and go to state 7
+
+    LENGTH       go to state 28
+    CONDITION    go to state 50
+    COMPARATION  go to state 47
+    EXPRESSION   go to state 48
+    TERM         go to state 30
+    FACTOR       go to state 31
+    CONSTANT     go to state 32
+
+
+State 22
+
+   35 DECLARATION: op_dim open_dec . VARIABLES close_dec op_as open_dec DATATYPES close_dec
+
+    id  shift, and go to state 51
+
+    VARIABLES  go to state 52
+
+
+State 23
+
+   44 FACTOR: id .
+
+    $default  reduce using rule 44 (FACTOR)
+
+
+State 24
+
+   53 CONSTANT: int_constant .
+
+    $default  reduce using rule 53 (CONSTANT)
+
+
+State 25
+
+   54 CONSTANT: real_constant .
+
+    $default  reduce using rule 54 (CONSTANT)
+
+
+State 26
+
+   55 CONSTANT: string_constant .
+
+    $default  reduce using rule 55 (CONSTANT)
+
+
+State 27
+
+   42 FACTOR: open_parenthesis . EXPRESSION close_parenthesis
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH      go to state 28
+    EXPRESSION  go to state 53
+    TERM        go to state 30
+    FACTOR      go to state 31
+    CONSTANT    go to state 32
+
+
+State 28
+
+   43 FACTOR: LENGTH .
+
+    $default  reduce using rule 43 (FACTOR)
+
+
+State 29
+
+   18 OUTPUT: op_display EXPRESSION .
+   36 EXPRESSION: EXPRESSION . op_sum TERM
+   37           | EXPRESSION . op_sub TERM
+
+    op_sum  shift, and go to state 54
+    op_sub  shift, and go to state 55
+
+    $default  reduce using rule 18 (OUTPUT)
+
+
+State 30
+
+   38 EXPRESSION: TERM .
+   39 TERM: TERM . op_mult FACTOR
+   40     | TERM . op_div FACTOR
+
+    op_mult  shift, and go to state 56
+    op_div   shift, and go to state 57
+
+    $default  reduce using rule 38 (EXPRESSION)
+
+
+State 31
+
+   41 TERM: FACTOR .
+
+    $default  reduce using rule 41 (TERM)
+
+
+State 32
+
+   45 FACTOR: CONSTANT .
+
+    $default  reduce using rule 45 (FACTOR)
+
+
+State 33
+
+   17 INPUT: op_get id .
+
+    $default  reduce using rule 17 (INPUT)
+
+
+State 34
+
+   11 LENGTH: fun_long open_parenthesis . LIST close_parenthesis
+
+    open_dec  shift, and go to state 58
+
+    LIST  go to state 59
+
+
+State 35
+
+    0 $accept: PROGRAM $end .
+
+    $default  accept
+
+
+State 36
+
+    2 CODE: CODE BLOCK .
+
+    $default  reduce using rule 2 (CODE)
+
+
+State 37
+
+    8 BLOCK: LENGTH separator .
+
+    $default  reduce using rule 8 (BLOCK)
+
+
+State 38
+
+    6 BLOCK: INPUT separator .
+
+    $default  reduce using rule 6 (BLOCK)
+
+
+State 39
+
+    7 BLOCK: OUTPUT separator .
+
+    $default  reduce using rule 7 (BLOCK)
+
+
+State 40
+
+    5 BLOCK: ASSIGNMENT separator .
+
+    $default  reduce using rule 5 (BLOCK)
+
+
+State 41
+
+    4 BLOCK: DECLARATION separator .
+
+    $default  reduce using rule 4 (BLOCK)
+
+
+State 42
+
+   19 ASSIGNMENT: id . op_assign EXPRESSION
+   20           | id . op_assign ASSIGNMENT
+   44 FACTOR: id .
+
+    op_assign  shift, and go to state 18
+
+    $default  reduce using rule 44 (FACTOR)
+
+
+State 43
+
+   20 ASSIGNMENT: id op_assign ASSIGNMENT .
+
+    $default  reduce using rule 20 (ASSIGNMENT)
+
+
+State 44
+
+   19 ASSIGNMENT: id op_assign EXPRESSION .
+   36 EXPRESSION: EXPRESSION . op_sum TERM
+   37           | EXPRESSION . op_sub TERM
+
+    op_sum  shift, and go to state 54
+    op_sub  shift, and go to state 55
+
+    $default  reduce using rule 19 (ASSIGNMENT)
+
+
+State 45
+
+   24 CONDITION: open_parenthesis . CONDITION close_parenthesis
+   42 FACTOR: open_parenthesis . EXPRESSION close_parenthesis
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 45
+    fun_long          shift, and go to state 7
+
+    LENGTH       go to state 28
+    CONDITION    go to state 60
+    COMPARATION  go to state 47
+    EXPRESSION   go to state 61
+    TERM         go to state 30
+    FACTOR       go to state 31
+    CONSTANT     go to state 32
+
+
+State 46
+
+   21 DECISION: op_if open_parenthesis CONDITION . close_parenthesis CODE op_endif
+   22 CONDITION: CONDITION . op_and COMPARATION
+   23          | CONDITION . op_or COMPARATION
+
+    op_and             shift, and go to state 62
+    op_or              shift, and go to state 63
+    close_parenthesis  shift, and go to state 64
+
+
+State 47
+
+   25 CONDITION: COMPARATION .
+
+    $default  reduce using rule 25 (CONDITION)
+
+
+State 48
+
+   26 COMPARATION: EXPRESSION . COMPARATOR EXPRESSION
+   36 EXPRESSION: EXPRESSION . op_sum TERM
+   37           | EXPRESSION . op_sub TERM
+
+    op_sum  shift, and go to state 54
+    op_sub  shift, and go to state 55
+    op_eq   shift, and go to state 65
+    op_lt   shift, and go to state 66
+    op_le   shift, and go to state 67
+    op_gt   shift, and go to state 68
+    op_ge   shift, and go to state 69
+    op_ne   shift, and go to state 70
+
+    COMPARATOR  go to state 71
+
+
+State 49
+
+   34 ITERATION: op_while id op_in . LIST op_do CODE op_endwhile
+
+    open_dec  shift, and go to state 58
+
+    LIST  go to state 72
+
+
+State 50
+
+   22 CONDITION: CONDITION . op_and COMPARATION
+   23          | CONDITION . op_or COMPARATION
+   33 ITERATION: op_while open_parenthesis CONDITION . close_parenthesis CODE op_endwhile
+
+    op_and             shift, and go to state 62
+    op_or              shift, and go to state 63
+    close_parenthesis  shift, and go to state 73
+
+
+State 51
+
+   47 VARIABLES: id .
+
+    $default  reduce using rule 47 (VARIABLES)
+
+
+State 52
+
+   35 DECLARATION: op_dim open_dec VARIABLES . close_dec op_as open_dec DATATYPES close_dec
+   46 VARIABLES: VARIABLES . dec_separator id
+
+    close_dec      shift, and go to state 74
+    dec_separator  shift, and go to state 75
+
+
+State 53
+
+   36 EXPRESSION: EXPRESSION . op_sum TERM
+   37           | EXPRESSION . op_sub TERM
+   42 FACTOR: open_parenthesis EXPRESSION . close_parenthesis
+
+    op_sum             shift, and go to state 54
+    op_sub             shift, and go to state 55
+    close_parenthesis  shift, and go to state 76
+
+
+State 54
+
+   36 EXPRESSION: EXPRESSION op_sum . TERM
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH    go to state 28
+    TERM      go to state 77
+    FACTOR    go to state 31
+    CONSTANT  go to state 32
+
+
+State 55
+
+   37 EXPRESSION: EXPRESSION op_sub . TERM
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH    go to state 28
+    TERM      go to state 78
+    FACTOR    go to state 31
+    CONSTANT  go to state 32
+
+
+State 56
+
+   39 TERM: TERM op_mult . FACTOR
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH    go to state 28
+    FACTOR    go to state 79
+    CONSTANT  go to state 32
+
+
+State 57
+
+   40 TERM: TERM op_div . FACTOR
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH    go to state 28
+    FACTOR    go to state 80
+    CONSTANT  go to state 32
+
+
+State 58
+
+   12 LIST: open_dec . ITEMS close_dec
+
+    id               shift, and go to state 81
+    int_constant     shift, and go to state 24
+    real_constant    shift, and go to state 25
+    string_constant  shift, and go to state 26
+
+    ITEMS     go to state 82
+    ITEM      go to state 83
+    CONSTANT  go to state 84
+
+
+State 59
+
+   11 LENGTH: fun_long open_parenthesis LIST . close_parenthesis
+
+    close_parenthesis  shift, and go to state 85
+
+
+State 60
+
+   22 CONDITION: CONDITION . op_and COMPARATION
+   23          | CONDITION . op_or COMPARATION
+   24          | open_parenthesis CONDITION . close_parenthesis
+
+    op_and             shift, and go to state 62
+    op_or              shift, and go to state 63
+    close_parenthesis  shift, and go to state 86
+
+
+State 61
+
+   26 COMPARATION: EXPRESSION . COMPARATOR EXPRESSION
+   36 EXPRESSION: EXPRESSION . op_sum TERM
+   37           | EXPRESSION . op_sub TERM
+   42 FACTOR: open_parenthesis EXPRESSION . close_parenthesis
+
+    op_sum             shift, and go to state 54
+    op_sub             shift, and go to state 55
+    op_eq              shift, and go to state 65
+    op_lt              shift, and go to state 66
+    op_le              shift, and go to state 67
+    op_gt              shift, and go to state 68
+    op_ge              shift, and go to state 69
+    op_ne              shift, and go to state 70
+    close_parenthesis  shift, and go to state 76
+
+    COMPARATOR  go to state 71
+
+
+State 62
+
+   22 CONDITION: CONDITION op_and . COMPARATION
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH       go to state 28
+    COMPARATION  go to state 87
+    EXPRESSION   go to state 48
+    TERM         go to state 30
+    FACTOR       go to state 31
+    CONSTANT     go to state 32
+
+
+State 63
+
+   23 CONDITION: CONDITION op_or . COMPARATION
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH       go to state 28
+    COMPARATION  go to state 88
+    EXPRESSION   go to state 48
+    TERM         go to state 30
+    FACTOR       go to state 31
+    CONSTANT     go to state 32
+
+
+State 64
+
+   21 DECISION: op_if open_parenthesis CONDITION close_parenthesis . CODE op_endif
+
+    id          shift, and go to state 1
+    op_if       shift, and go to state 2
+    op_while    shift, and go to state 3
+    op_dim      shift, and go to state 4
+    op_display  shift, and go to state 5
+    op_get      shift, and go to state 6
+    fun_long    shift, and go to state 7
+
+    CODE         go to state 89
+    BLOCK        go to state 10
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 65
+
+   27 COMPARATOR: op_eq .
+
+    $default  reduce using rule 27 (COMPARATOR)
+
+
+State 66
+
+   28 COMPARATOR: op_lt .
+
+    $default  reduce using rule 28 (COMPARATOR)
+
+
+State 67
+
+   29 COMPARATOR: op_le .
+
+    $default  reduce using rule 29 (COMPARATOR)
+
+
+State 68
+
+   30 COMPARATOR: op_gt .
+
+    $default  reduce using rule 30 (COMPARATOR)
+
+
+State 69
+
+   31 COMPARATOR: op_ge .
+
+    $default  reduce using rule 31 (COMPARATOR)
+
+
+State 70
+
+   32 COMPARATOR: op_ne .
+
+    $default  reduce using rule 32 (COMPARATOR)
+
+
+State 71
+
+   26 COMPARATION: EXPRESSION COMPARATOR . EXPRESSION
+
+    id                shift, and go to state 23
+    int_constant      shift, and go to state 24
+    real_constant     shift, and go to state 25
+    string_constant   shift, and go to state 26
+    open_parenthesis  shift, and go to state 27
+    fun_long          shift, and go to state 7
+
+    LENGTH      go to state 28
+    EXPRESSION  go to state 90
+    TERM        go to state 30
+    FACTOR      go to state 31
+    CONSTANT    go to state 32
+
+
+State 72
+
+   34 ITERATION: op_while id op_in LIST . op_do CODE op_endwhile
+
+    op_do  shift, and go to state 91
+
+
+State 73
+
+   33 ITERATION: op_while open_parenthesis CONDITION close_parenthesis . CODE op_endwhile
+
+    id          shift, and go to state 1
+    op_if       shift, and go to state 2
+    op_while    shift, and go to state 3
+    op_dim      shift, and go to state 4
+    op_display  shift, and go to state 5
+    op_get      shift, and go to state 6
+    fun_long    shift, and go to state 7
+
+    CODE         go to state 92
+    BLOCK        go to state 10
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 74
+
+   35 DECLARATION: op_dim open_dec VARIABLES close_dec . op_as open_dec DATATYPES close_dec
+
+    op_as  shift, and go to state 93
+
+
+State 75
+
+   46 VARIABLES: VARIABLES dec_separator . id
+
+    id  shift, and go to state 94
+
+
+State 76
+
+   42 FACTOR: open_parenthesis EXPRESSION close_parenthesis .
+
+    $default  reduce using rule 42 (FACTOR)
+
+
+State 77
+
+   36 EXPRESSION: EXPRESSION op_sum TERM .
+   39 TERM: TERM . op_mult FACTOR
+   40     | TERM . op_div FACTOR
+
+    op_mult  shift, and go to state 56
+    op_div   shift, and go to state 57
+
+    $default  reduce using rule 36 (EXPRESSION)
+
+
+State 78
+
+   37 EXPRESSION: EXPRESSION op_sub TERM .
+   39 TERM: TERM . op_mult FACTOR
+   40     | TERM . op_div FACTOR
+
+    op_mult  shift, and go to state 56
+    op_div   shift, and go to state 57
+
+    $default  reduce using rule 37 (EXPRESSION)
+
+
+State 79
+
+   39 TERM: TERM op_mult FACTOR .
+
+    $default  reduce using rule 39 (TERM)
+
+
+State 80
+
+   40 TERM: TERM op_div FACTOR .
+
+    $default  reduce using rule 40 (TERM)
+
+
+State 81
+
+   16 ITEM: id .
+
+    $default  reduce using rule 16 (ITEM)
+
+
+State 82
+
+   12 LIST: open_dec ITEMS . close_dec
+   13 ITEMS: ITEMS . dec_separator ITEM
+
+    close_dec      shift, and go to state 95
+    dec_separator  shift, and go to state 96
+
+
+State 83
+
+   14 ITEMS: ITEM .
+
+    $default  reduce using rule 14 (ITEMS)
+
+
+State 84
+
+   15 ITEM: CONSTANT .
+
+    $default  reduce using rule 15 (ITEM)
+
+
+State 85
+
+   11 LENGTH: fun_long open_parenthesis LIST close_parenthesis .
+
+    $default  reduce using rule 11 (LENGTH)
+
+
+State 86
+
+   24 CONDITION: open_parenthesis CONDITION close_parenthesis .
+
+    $default  reduce using rule 24 (CONDITION)
+
+
+State 87
+
+   22 CONDITION: CONDITION op_and COMPARATION .
+
+    $default  reduce using rule 22 (CONDITION)
+
+
+State 88
+
+   23 CONDITION: CONDITION op_or COMPARATION .
+
+    $default  reduce using rule 23 (CONDITION)
+
+
+State 89
+
+    2 CODE: CODE . BLOCK
+   21 DECISION: op_if open_parenthesis CONDITION close_parenthesis CODE . op_endif
+
+    id          shift, and go to state 1
+    op_if       shift, and go to state 2
+    op_endif    shift, and go to state 97
+    op_while    shift, and go to state 3
+    op_dim      shift, and go to state 4
+    op_display  shift, and go to state 5
+    op_get      shift, and go to state 6
+    fun_long    shift, and go to state 7
+
+    BLOCK        go to state 36
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 90
+
+   26 COMPARATION: EXPRESSION COMPARATOR EXPRESSION .
+   36 EXPRESSION: EXPRESSION . op_sum TERM
+   37           | EXPRESSION . op_sub TERM
+
+    op_sum  shift, and go to state 54
+    op_sub  shift, and go to state 55
+
+    $default  reduce using rule 26 (COMPARATION)
+
+
+State 91
+
+   34 ITERATION: op_while id op_in LIST op_do . CODE op_endwhile
+
+    id          shift, and go to state 1
+    op_if       shift, and go to state 2
+    op_while    shift, and go to state 3
+    op_dim      shift, and go to state 4
+    op_display  shift, and go to state 5
+    op_get      shift, and go to state 6
+    fun_long    shift, and go to state 7
+
+    CODE         go to state 98
+    BLOCK        go to state 10
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 92
+
+    2 CODE: CODE . BLOCK
+   33 ITERATION: op_while open_parenthesis CONDITION close_parenthesis CODE . op_endwhile
+
+    id           shift, and go to state 1
+    op_if        shift, and go to state 2
+    op_while     shift, and go to state 3
+    op_endwhile  shift, and go to state 99
+    op_dim       shift, and go to state 4
+    op_display   shift, and go to state 5
+    op_get       shift, and go to state 6
+    fun_long     shift, and go to state 7
+
+    BLOCK        go to state 36
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 93
+
+   35 DECLARATION: op_dim open_dec VARIABLES close_dec op_as . open_dec DATATYPES close_dec
+
+    open_dec  shift, and go to state 100
+
+
+State 94
+
+   46 VARIABLES: VARIABLES dec_separator id .
+
+    $default  reduce using rule 46 (VARIABLES)
+
+
+State 95
+
+   12 LIST: open_dec ITEMS close_dec .
+
+    $default  reduce using rule 12 (LIST)
+
+
+State 96
+
+   13 ITEMS: ITEMS dec_separator . ITEM
+
+    id               shift, and go to state 81
+    int_constant     shift, and go to state 24
+    real_constant    shift, and go to state 25
+    string_constant  shift, and go to state 26
+
+    ITEM      go to state 101
+    CONSTANT  go to state 84
+
+
+State 97
+
+   21 DECISION: op_if open_parenthesis CONDITION close_parenthesis CODE op_endif .
+
+    $default  reduce using rule 21 (DECISION)
+
+
+State 98
+
+    2 CODE: CODE . BLOCK
+   34 ITERATION: op_while id op_in LIST op_do CODE . op_endwhile
+
+    id           shift, and go to state 1
+    op_if        shift, and go to state 2
+    op_while     shift, and go to state 3
+    op_endwhile  shift, and go to state 102
+    op_dim       shift, and go to state 4
+    op_display   shift, and go to state 5
+    op_get       shift, and go to state 6
+    fun_long     shift, and go to state 7
+
+    BLOCK        go to state 36
+    LENGTH       go to state 11
+    INPUT        go to state 12
+    OUTPUT       go to state 13
+    ASSIGNMENT   go to state 14
+    DECISION     go to state 15
+    ITERATION    go to state 16
+    DECLARATION  go to state 17
+
+
+State 99
+
+   33 ITERATION: op_while open_parenthesis CONDITION close_parenthesis CODE op_endwhile .
+
+    $default  reduce using rule 33 (ITERATION)
+
+
+State 100
+
+   35 DECLARATION: op_dim open_dec VARIABLES close_dec op_as open_dec . DATATYPES close_dec
+
+    int_type     shift, and go to state 103
+    real_type    shift, and go to state 104
+    string_type  shift, and go to state 105
+
+    DATATYPES  go to state 106
+    DATATYPE   go to state 107
+
+
+State 101
+
+   13 ITEMS: ITEMS dec_separator ITEM .
+
+    $default  reduce using rule 13 (ITEMS)
+
+
+State 102
+
+   34 ITERATION: op_while id op_in LIST op_do CODE op_endwhile .
+
+    $default  reduce using rule 34 (ITERATION)
+
+
+State 103
+
+   50 DATATYPE: int_type .
+
+    $default  reduce using rule 50 (DATATYPE)
+
+
+State 104
+
+   51 DATATYPE: real_type .
+
+    $default  reduce using rule 51 (DATATYPE)
+
+
+State 105
+
+   52 DATATYPE: string_type .
+
+    $default  reduce using rule 52 (DATATYPE)
+
+
+State 106
+
+   35 DECLARATION: op_dim open_dec VARIABLES close_dec op_as open_dec DATATYPES . close_dec
+   48 DATATYPES: DATATYPES . dec_separator DATATYPE
+
+    close_dec      shift, and go to state 108
+    dec_separator  shift, and go to state 109
+
+
+State 107
+
+   49 DATATYPES: DATATYPE .
+
+    $default  reduce using rule 49 (DATATYPES)
+
+
+State 108
+
+   35 DECLARATION: op_dim open_dec VARIABLES close_dec op_as open_dec DATATYPES close_dec .
+
+    $default  reduce using rule 35 (DECLARATION)
+
+
+State 109
+
+   48 DATATYPES: DATATYPES dec_separator . DATATYPE
+
+    int_type     shift, and go to state 103
+    real_type    shift, and go to state 104
+    string_type  shift, and go to state 105
+
+    DATATYPE  go to state 110
+
+
+State 110
+
+   48 DATATYPES: DATATYPES dec_separator DATATYPE .
+
+    $default  reduce using rule 48 (DATATYPES)

@@ -1,0 +1,18 @@
+NOMBRE                              | TIPODATO             | VALOR                              | LONGITUD   
+--------------------------------------------------------------------------------------------------------------
+akum                                | ID                   |                                     |            
+total                               | ID                   |                                     |            
+rezult                              | ID                   |                                     |            
+nomo                                | ID                   |                                     |            
+_0                                  | Constant Integer     | 0                                   |            
+_1                                  | Constant Integer     | 1                                   |            
+_0.0                                | Constant Real        | 0.0                                 |            
+_2                                  | Constant Integer     | 2                                   |            
+_1.14                               | Constant Real        | 1.14                                |            
+_"korekte"                          | Constant String      | "korekte"                           | 7          
+_10                                 | Constant Integer     | 10                                  |            
+_"Tero"                             | Constant String      | "Tero"                              | 4          
+_"Luno"                             | Constant String      | "Luno"                              | 4          
+_"Marso"                            | Constant String      | "Marso"                             | 5          
+_"Saluton "                         | Constant String      | "Saluton "                          | 8          
+_"Saluton Mondo!"                   | Constant String      | "Saluton Mondo!"                    | 14         

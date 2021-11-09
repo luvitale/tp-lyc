@@ -1,0 +1,1 @@
+Primera.exe tests/prueba.txt
