@@ -1,0 +1,1 @@
+Segunda.exe tests/prueba.txt

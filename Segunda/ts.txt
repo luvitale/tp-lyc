@@ -1,0 +1,24 @@
+ NOMBRE                    | TIPODATO         | VALOR                          | LONGITUD  
+------------------------------------------------------------------------------------------
+ Luno                      | Constant String  | _Luno                          | 4         
+ Marso                     | Constant String  | _Marso                         | 5         
+ Saluton                   | Constant String  | _Saluton                       | 8         
+ Saluton Mondo!            | Constant String  | _Saluton Mondo!                | 14        
+ Tero                      | Constant String  | _Tero                          | 4         
+ _0                        | Constant Integer | 0                              | -         
+ _0.000000                 | Constant Real    | 0.000000                       | -         
+ _1                        | Constant Integer | 1                              | -         
+ _1.140000                 | Constant Real    | 1.140000                       | -         
+ _10                       | Constant Integer | 10                             | -         
+ _10.000000                | Constant Real    | 10.000000                      | -         
+ _2                        | Constant Integer | 2                              | -         
+ _30                       | Constant Integer | 30                             | -         
+ _30.000000                | Constant Real    | 30.000000                      | -         
+ akum                      | ID Integer       |                                | -         
+ akum 10 but total 30      | Constant String  | _akum 10 but total 30          | 20        
+ akum 10 but total not     | Constant String  | _akum 10 but total not         | 21        
+ korekte                   | Constant String  | _korekte                       | 7         
+ nomo                      | ID String        |                                | -         
+ rezult                    | ID String        |                                | -         
+ total                     | ID Real          |                                | -         
+ total and akum equal 10   | Constant String  | _total and akum equal 10       | 23        
