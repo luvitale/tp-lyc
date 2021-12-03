@@ -1,0 +1,33 @@
+ NOMBRE                    | TIPODATO         | VALOR                          | LONGITUD  
+------------------------------------------------------------------------------------------
+ @act                      | ID Integer       |                                | -         
+ @result_121               | ID Real          |                                | -         
+ @result_26                | ID Real          |                                | -         
+ @result_27                | ID Real          |                                | -         
+ @result_32                | ID Real          |                                | -         
+ @result_6                 | ID Real          |                                | -         
+ @result_85                | ID Real          |                                | -         
+ _i_0                      | Constant Integer | 0                              | -         
+ _i_1                      | Constant Integer | 1                              | -         
+ _i_10                     | Constant Integer | 10                             | -         
+ _i_2                      | Constant Integer | 2                              | -         
+ _i_3                      | Constant Integer | 3                              | -         
+ _i_30                     | Constant Integer | 30                             | -         
+ _r_0_000000               | Constant Real    | 0.000000                       | -         
+ _r_10_000000              | Constant Real    | 10.000000                      | -         
+ _r_1_140000               | Constant Real    | 1.140000                       | -         
+ _r_30_000000              | Constant Real    | 30.000000                      | -         
+ _s_Enigu_nomon@_          | Constant String  | Enigu nomon:                   | 13        
+ _s_Korekte                | Constant String  | Korekte                        | 7         
+ _s_Luno                   | Constant String  | Luno                           | 4         
+ _s_Marso                  | Constant String  | Marso                          | 5         
+ _s_Saluton_               | Constant String  | Saluton                        | 8         
+ _s_Saluton_Mondo          | Constant String  | Saluton Mondo                  | 13        
+ _s_Tero                   | Constant String  | Tero                           | 4         
+ _s_akum_10_but_total_30   | Constant String  | akum 10 but total 30           | 20        
+ _s_akum_10_but_total_not  | Constant String  | akum 10 but total not          | 21        
+ _s_total_and_akum_equal_10 | Constant String  | total and akum equal 10        | 23        
+ akum                      | ID Integer       |                                | -         
+ nomo                      | ID String        |                                | -         
+ rezult                    | ID String        |                                | -         
+ total                     | ID Real          |                                | -         

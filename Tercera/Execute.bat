@@ -1,0 +1,1 @@
+Grupo15.exe tests/prueba.txt

@@ -7,6 +7,22 @@
 
 > [![compilador](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/CompilationScheme-Spanish.png/300px-CompilationScheme-Spanish.png)](https://es.wikipedia.org/wiki/Compilador)
 
+## [Primera entrega](Primera)
+
+* [Compile.bat](Primera/Compile.bat)
+* [Execute.bat](Primera/Execute.bat)
+
+## [Segunda entrega](Segunda)
+
+* [Compile.bat](Segunda/Compile.bat)
+* [Execute.bat](Segunda/Execute.bat)
+
+## [Tercera entrega](Tercera)
+
+* [Compile.bat](Tercera/Compile.bat)
+* [Execute.bat](Tercera/Execute.bat)
+* [Grupo15.bat](Tercera/Grupo15.bat)
+
 ## Instalar dependencias
 
 * [GCC](https://gcc.gnu.org/)
@@ -40,7 +56,7 @@ make
 ```
 flex -o lex.yy.c Lexico.l
 bison -dyv Sintactico.y
-gcc lex.yy.c y.tab.c ts.c queue.c rpn.c stack.c -o tradukaten.exe -fcommon
+gcc lex.yy.c y.tab.c ts.c rpn.c utils/*.c -o tradukaten.exe -fcommon
 ```
 
 O
@@ -48,11 +64,20 @@ O
 ```
 flex -o lex.yy.c Lexico.l
 bison -dyv Sintactico.y
-gcc lex.yy.c y.tab.c ts.c queue.c rpn.c stack.c -o tradukaten.app -fcommon
+gcc lex.yy.c y.tab.c ts.c rpn.c utils/*.c -o tradukaten.app -fcommon
 ```
 
 ### Test
 
 ```
 make test
+```
+
+### Ensamblar
+
+```
+tasm Final.asm
+tlink /3 /x /v Final.obj numbers.obj
+pause
+Final.exe
 ```
